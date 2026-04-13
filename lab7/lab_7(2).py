@@ -15,9 +15,7 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
 
-# ---------------------------------
 # Load dataset
-# ---------------------------------
 df = pd.read_excel("Conf_Text_Labels.xlsx")
 
 df = df.dropna(subset=['Text', 'Conf Label'])
@@ -28,17 +26,13 @@ X = df['Text']
 y = df['Conf Label']
 
 
-# ---------------------------------
 # Train Test Split
-# ---------------------------------
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
 
 
-# ---------------------------------
 # Classifiers
-# ---------------------------------
 models = {
     "SVM": LinearSVC(),
     "Decision Tree": DecisionTreeClassifier(),
@@ -49,15 +43,9 @@ models = {
 }
 
 
-# ---------------------------------
-# Results storage
-# ---------------------------------
 results = []
 
-
-# ---------------------------------
 # Train & Evaluate each model
-# ---------------------------------
 for name, model in models.items():
 
     pipeline = Pipeline([
@@ -82,10 +70,7 @@ for name, model in models.items():
 
     results.append([name, train_acc, test_acc, precision, recall, f1])
 
-
-# ---------------------------------
 # Create Results Table
-# ---------------------------------
 results_df = pd.DataFrame(results, columns=[
     "Model",
     "Train Accuracy",
